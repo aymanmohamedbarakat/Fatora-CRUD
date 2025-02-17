@@ -3,10 +3,27 @@ import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./App.css";
 import Swal from "sweetalert2";
 export default function App() {
+  // const [phoneIndex, setPhoneIndex] = useState(0);
+  // const [EditPhones, setEditPhones] = useState(false);
+  // const [phoneName, setNameInput] = useState("");
+  // const [phonePrice, setPriceInput] = useState(0);
+  // const [phoneQts, setQtsInput] = useState(0);
+
   const [ModelIndex, setModelIndex] = useState(false);
   const NameInput = useRef();
   const PriceInput = useRef();
   const QtsInput = useRef();
+
+  const [phones, setPhones] = useState([
+    { name: "iphonx", price: 300, qts: 5 },
+    { name: "iphon10", price: 400, qts: 6 },
+    { name: "iphon12", price: 500, qts: 7 },
+  ]);
+  const TotalAmount = phones.reduce(
+    (acc, phones) => acc + phones.price * phones.qts,
+    0
+  );
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPhone = {
@@ -25,35 +42,38 @@ export default function App() {
     });
     setPhones(copyPhones);
   };
-
-  const [phones, setPhones] = useState([
-    { name: "iphonx", price: 300, qts: 5 },
-    { name: "iphon10", price: 400, qts: 6 },
-    { name: "iphon12", price: 500, qts: 7 },
-  ]);
-  const TotalAmount = phones.reduce((acc , phones)=> acc + phones.price * phones.qts , 0)
-  const removeItem = (indexToRemove) => {
+  const removeItem = (phoneIndex) => {
     Swal.fire({
       icon: "warning",
-      title: "Are you sure?",      
+      title: "Are you sure?",
       showDenyButton: true,
-      showConfirmButton:true,
-      denyButtonText : "No , Don't Delete",
-      denyButtonColor:"green",
-      confirmButtonText:"Yes , Delete it",
+      showConfirmButton: true,
+      denyButtonText: "No , Don't Delete",
+      denyButtonColor: "green",
+      confirmButtonText: "Yes , Delete it",
       confirmButtonColor: "red",
     }).then((result) => {
       if (result.isConfirmed) {
-        setPhones(phones.filter((el, index) => index !== indexToRemove));
+        setPhones(phones.filter((el, index) => index !== phoneIndex));
         Swal.fire({
           icon: "success",
           title: "Phone Removed",
-          showConfirmButton:false,
+          showConfirmButton: false,
           timer: 1200,
-        })
+        });
       }
     });
   };
+
+  // const handleEditPhone = (phoneIndex) => {
+  //   const phoneToEdit = phones.find((el , index) => el.index === phoneIndex)
+  //   if (phoneToEdit){
+  //     setNameInput(phoneToEdit.name)
+  //     setPriceInput(phoneToEdit.price)
+  //     setQtsInput(phoneToEdit.qts)
+  //     setModelIndex(true)
+  //   }
+  // };
 
   // const handleEdit = (index) => {
   //   const phonesToEdit = phones.find((phones , index) => phones.index === index);
@@ -102,6 +122,7 @@ export default function App() {
                       <FaRegTrashAlt />
                     </button>
                     <button className="btn btn-warning text-center text-light">
+                      {/*  onClick={() => handleEditPhone(index)}*/}
                       <FaEdit />
                     </button>
                   </div>
