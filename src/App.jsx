@@ -110,7 +110,6 @@ export default function App() {
 
   return (
     <div className="App col-12 container d-flex flex-column align-items-center">
-      
       <div className="d-flex justify-content-between align-items-center w-100">
         <h1 className="display-4">Fatora System</h1>
         <button
@@ -120,8 +119,6 @@ export default function App() {
           show Model
         </button>
       </div>
-
-
 
       <table className="table table-dark table-bordered table-hover  text-center text-capitalize">
         <thead className="table-active">
@@ -198,7 +195,10 @@ export default function App() {
               placeholder="enter new qts"
               ref={QtsInput}
             />
-            <button className="btn btn-primary text-capitalize"> Add New Phones</button>
+            <button className="btn btn-primary text-capitalize">
+              {" "}
+              Add New Phones
+            </button>
           </form>
         </div>
       ) : null}
@@ -241,7 +241,9 @@ export default function App() {
                 setQtsInput(event.target.value);
               }}
             />
-            <button className="btn btn-success text-capitalize">save Edit</button>
+            <button className="btn btn-success text-capitalize">
+              save Edit
+            </button>
           </form>
         </div>
       ) : null}
