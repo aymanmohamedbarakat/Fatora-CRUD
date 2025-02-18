@@ -19,14 +19,10 @@ export default function App() {
     { name: "iphone x", price: 300, qts: 5 },
     { name: "iphone 10", price: 400, qts: 6 },
     { name: "iphone 12", price: 500, qts: 7 },
-    { name: "Samsung Galaxy S21", price: 700, qts: 12 },
     { name: "Google Pixel 6", price: 600, qts: 5 },
     { name: "OnePlus 9 Pro", price: 650, qts: 10 },
     { name: "Xiaomi Mi 11", price: 450, qts: 15 },
-    { name: "Sony Xperia 5 II", price: 800, qts: 3 },
     { name: "Nokia 9 PureView", price: 400, qts: 8 },
-    { name: "LG V60 ThinQ", price: 550, qts: 6 },
-    { name: "Motorola Edge+", price: 750, qts: 4 },
     { name: "Huawei P40 Pro", price: 680, qts: 9 },
   ]);
   const TotalAmount = phones.reduce(
