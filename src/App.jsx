@@ -60,7 +60,14 @@ export default function App() {
       confirmButtonColor: "red",
     }).then((result) => {
       if (result.isConfirmed) {
-        setPhones(phones.filter((el, index) => index !== phoneIndex));
+        // setPhones(phones.filter((el, index) => index !== phoneIndex));
+        let copyPhones = [...phones];
+        copyPhones.splice(phoneIndex, 1);
+        setPhones(copyPhones);
+        // setPhones([...copyPhones.splice(phoneIndex , 1) , ???]);
+        // using splice in setPhones
+        // setPhones([...phones] ,copyPhones.splice(phoneIndex, 1) )
+
         Swal.fire({
           icon: "success",
           title: "Phone Removed",
@@ -103,13 +110,19 @@ export default function App() {
 
   return (
     <div className="App col-12 container d-flex flex-column align-items-center">
-      <h1 className="display-4">Fatora System</h1>
-      <button
-        onClick={() => setModelIndex(true)}
-        className="btn btn-success mb-2"
-      >
-        show Model
-      </button>
+      
+      <div className="d-flex justify-content-between align-items-center w-100">
+        <h1 className="display-4">Fatora System</h1>
+        <button
+          onClick={() => setModelIndex(true)}
+          className="btn btn-success "
+        >
+          show Model
+        </button>
+      </div>
+
+
+
       <table className="table table-dark table-bordered table-hover  text-center text-capitalize">
         <thead className="table-active">
           <tr>
@@ -185,7 +198,7 @@ export default function App() {
               placeholder="enter new qts"
               ref={QtsInput}
             />
-            <button className="btn btn-primary"> Add New Phones</button>
+            <button className="btn btn-primary text-capitalize"> Add New Phones</button>
           </form>
         </div>
       ) : null}
@@ -228,7 +241,7 @@ export default function App() {
                 setQtsInput(event.target.value);
               }}
             />
-            <button className="btn btn-primary">save Edit</button>
+            <button className="btn btn-success text-capitalize">save Edit</button>
           </form>
         </div>
       ) : null}
