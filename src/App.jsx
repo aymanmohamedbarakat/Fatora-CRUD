@@ -3,21 +3,22 @@ import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./App.css";
 import Swal from "sweetalert2";
 export default function App() {
-  // const [phoneIndex, setPhoneIndex] = useState(0);
-  // const [EditPhones, setEditPhones] = useState(false);
-  // const [phoneName, setNameInput] = useState("");
-  // const [phonePrice, setPriceInput] = useState(0);
-  // const [phoneQts, setQtsInput] = useState(0);
+  const [phoneName, setNameInput] = useState("");
+  const [phonePrice, setPriceInput] = useState(0);
+  const [phoneQts, setQtsInput] = useState(0);
 
+  const [phoneIndex, setPhoneIndex] = useState("");
   const [ModelIndex, setModelIndex] = useState(false);
+  const [editModalIndex, setEditModalIndex] = useState(false);
+
   const NameInput = useRef();
   const PriceInput = useRef();
   const QtsInput = useRef();
 
   const [phones, setPhones] = useState([
-    { name: "iphonx", price: 300, qts: 5 },
-    { name: "iphon10", price: 400, qts: 6 },
-    { name: "iphon12", price: 500, qts: 7 },
+    { name: "iphon x", price: 300, qts: 5 },
+    { name: "iphon 10", price: 400, qts: 6 },
+    { name: "iphon 12", price: 500, qts: 7 },
   ]);
   const TotalAmount = phones.reduce(
     (acc, phones) => acc + phones.price * phones.qts,
@@ -65,26 +66,35 @@ export default function App() {
     });
   };
 
-  // const handleEditPhone = (phoneIndex) => {
-  //   const phoneToEdit = phones.find((el , index) => el.index === phoneIndex)
-  //   if (phoneToEdit){
-  //     setNameInput(phoneToEdit.name)
-  //     setPriceInput(phoneToEdit.price)
-  //     setQtsInput(phoneToEdit.qts)
-  //     setModelIndex(true)
-  //   }
-  // };
+  const openPhoneToEdit = (phoneIndex) => {
+    setPhoneIndex(phoneIndex);
+    let phone = phones[phoneIndex];
+    setNameInput(phone.name);
+    setPriceInput(phone.price);
+    setQtsInput(phone.qts);
+    setEditModalIndex(true);
+  };
 
-  // const handleEdit = (index) => {
-  //   const phonesToEdit = phones.find((phones , index) => phones.index === index);
-  //   if (phonesToEdit) {
-  //     setTaskName(phonesToEdit.name);
-  //     setTaskEmail(phonesToEdit.email);
-  //     setTaskPhone(phonesToEdit.phone);
-  //     setTaskType(phonesToEdit.type);
-  //     setPhones(index);
-  //   }
-  // };
+  const handleSave = (event) => {
+    event.preventDefault();
+    let obj = {
+      name: phoneName,
+      price: +phonePrice,
+      qts: +phoneQts,
+    };
+    let copyPhones = [...phones];
+    copyPhones[phoneIndex] = obj;
+    setPhones(copyPhones);
+    console.log(copyPhones);
+    Swal.fire({
+      icon: "success",
+      title: "Phone Updated",
+      showConfirmButton: false,
+      timer: 1200,
+    }).then(() => {
+      setEditModalIndex(false);
+    });
+  };
 
   return (
     <div className="App col-12 container d-flex flex-column align-items-center">
@@ -121,8 +131,12 @@ export default function App() {
                     >
                       <FaRegTrashAlt />
                     </button>
-                    <button className="btn btn-warning text-center text-light">
-                      {/*  onClick={() => handleEditPhone(index)}*/}
+                    <button
+                      className="btn btn-warning text-center text-light"
+                      onClick={() => {
+                        openPhoneToEdit(index);
+                      }}
+                    >
                       <FaEdit />
                     </button>
                   </div>
@@ -170,6 +184,50 @@ export default function App() {
           </form>
         </div>
       ) : null}
+
+      {editModalIndex == true ? (
+        <div
+          className="our__modal d-flex justify-content-center align-items-center"
+          onClick={() => setEditModalIndex(false)}
+        >
+          <form
+            className=" model__content col-12 col-md-5 bg-light rounded shadow border p-3 d-flex flex-column gap-2 animate__animated animate__fadeInDown"
+            onClick={(event) => event.stopPropagation()}
+            onSubmit={handleSave}
+          >
+            <input
+              className="form-control "
+              type="text"
+              placeholder="enter new phone"
+              defaultValue={phoneName}
+              onChange={(event) => {
+                setNameInput(event.target.value);
+              }}
+              // id="phoneName"
+            />
+            <input
+              className="form-control "
+              type="number"
+              placeholder="enter new price"
+              defaultValue={phonePrice}
+              onChange={(event) => {
+                setPriceInput(event.target.value);
+              }}
+            />
+            <input
+              className="form-control "
+              type="number"
+              placeholder="enter new qts"
+              defaultValue={phoneQts}
+              onChange={(event) => {
+                setQtsInput(event.target.value);
+              }}
+            />
+            <button className="btn btn-primary">save Edit</button>
+          </form>
+        </div>
+      ) : null}
     </div>
   );
+  s;
 }
