@@ -3,13 +3,13 @@ import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./App.css";
 import Swal from "sweetalert2";
 export default function App() {
-  const [phoneName, setNameInput] = useState("");
-  const [phonePrice, setPriceInput] = useState(0);
-  const [phoneQts, setQtsInput] = useState(0);
+  // const [phoneName, setNameInput] = useState("");
+  // const [phonePrice, setPriceInput] = useState(0);
+  // const [phoneQts, setQtsInput] = useState(0);
 
-  const [phoneIndex, setPhoneIndex] = useState("");
   const [ModelIndex, setModelIndex] = useState(false);
-  const [editModalIndex, setEditModalIndex] = useState(false);
+  // const [phoneIndex, setPhoneIndex] = useState("");
+  // const [editModalIndex, setEditModalIndex] = useState(false);
 
   const NameInput = useRef();
   const PriceInput = useRef();
@@ -78,35 +78,35 @@ export default function App() {
     });
   };
 
-  const openPhoneToEdit = (phoneIndex) => {
-    setPhoneIndex(phoneIndex);
-    let phone = phones[phoneIndex];
-    setNameInput(phone.name);
-    setPriceInput(phone.price);
-    setQtsInput(phone.qts);
-    setEditModalIndex(true);
-  };
+  // const openPhoneToEdit = (phoneIndex) => {
+  //   setPhoneIndex(phoneIndex);
+  //   let phone = phones[phoneIndex];
+  //   setNameInput(phone.name);
+  //   setPriceInput(phone.price);
+  //   setQtsInput(phone.qts);
+  //   setEditModalIndex(true);
+  // };
 
-  const handleSave = (event) => {
-    event.preventDefault();
-    let obj = {
-      name: phoneName,
-      price: +phonePrice,
-      qts: +phoneQts,
-    };
-    let copyPhones = [...phones];
-    copyPhones[phoneIndex] = obj;
-    setPhones(copyPhones);
-    console.log(copyPhones);
-    Swal.fire({
-      icon: "success",
-      title: "Phone Updated",
-      showConfirmButton: false,
-      timer: 1200,
-    }).then(() => {
-      setEditModalIndex(false);
-    });
-  };
+  // const handleSave = (event) => {
+  //   event.preventDefault();
+  //   let obj = {
+  //     name: phoneName,
+  //     price: +phonePrice,
+  //     qts: +phoneQts,
+  //   };
+  //   let copyPhones = [...phones];
+  //   copyPhones[phoneIndex] = obj;
+  //   setPhones(copyPhones);
+  //   console.log(copyPhones);
+  //   Swal.fire({
+  //     icon: "success",
+  //     title: "Phone Updated",
+  //     showConfirmButton: false,
+  //     timer: 1200,
+  //   }).then(() => {
+  //     setEditModalIndex(false);
+  //   });
+  // };
 
   return (
     <div className="App col-12 container d-flex flex-column align-items-center">
@@ -148,9 +148,9 @@ export default function App() {
                     </button>
                     <button
                       className="btn btn-warning text-center text-light"
-                      onClick={() => {
-                        openPhoneToEdit(index);
-                      }}
+                      // onClick={() => {
+                      //   openPhoneToEdit(index);
+                      // }}
                     >
                       <FaEdit />
                     </button>
@@ -196,14 +196,13 @@ export default function App() {
               ref={QtsInput}
             />
             <button className="btn btn-primary text-capitalize">
-              {" "}
               Add New Phones
             </button>
           </form>
         </div>
       ) : null}
-
-      {editModalIndex == true ? (
+     
+     {/* {editModalIndex == true ? (
         <div
           className="our__modal d-flex justify-content-center align-items-center"
           onClick={() => setEditModalIndex(false)}
@@ -221,7 +220,7 @@ export default function App() {
               onChange={(event) => {
                 setNameInput(event.target.value);
               }}
-              // id="phoneName"
+               id="phoneName"
             />
             <input
               className="form-control "
@@ -246,7 +245,7 @@ export default function App() {
             </button>
           </form>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
   s;
