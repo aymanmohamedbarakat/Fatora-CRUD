@@ -64,9 +64,9 @@ export default function App() {
         let copyPhones = [...phones];
         copyPhones.splice(phoneIndex, 1);
         setPhones(copyPhones);
-        // setPhones([...copyPhones.splice(phoneIndex , 1) , ???]);
+
         // using splice in setPhones
-        // setPhones([...phones] ,copyPhones.splice(phoneIndex, 1) )
+        //  setPhones([...phones].splice(phoneIndex, 1) ) ???
 
         Swal.fire({
           icon: "success",
@@ -120,7 +120,7 @@ export default function App() {
         </button>
       </div>
 
-      <table className="table table-dark table-bordered table-hover  text-center text-capitalize">
+      <table className="table table-striped table-dark table-bordered table-hover  text-center text-capitalize">
         <thead className="table-active">
           <tr>
             <th>-</th>
